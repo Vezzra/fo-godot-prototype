@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://resources/fonts/Roboto-Regular.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/image/Icon_Off_2.bmp" type="Texture" id=2]
+[ext_resource path="res://MainMenuBtn.gd" type="Script" id=3]
+[ext_resource path="res://assets/image/Icon_On_2.bmp" type="Texture" id=4]
+
+[node name="MainMenuBtn" type="TextureButton"]
+margin_left = 39.0
+margin_right = 339.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 300, 70 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource( 2 )
+texture_hover = ExtResource( 4 )
+expand = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.72549, 0.662745, 0.145098, 1 )
+text = "Title"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

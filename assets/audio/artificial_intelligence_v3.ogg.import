@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/artificial_intelligence_v3.ogg-41a8e6cfd55694e82abeed0f3e996470.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/artificial_intelligence_v3.ogg"
+dest_files=[ "res://.import/artificial_intelligence_v3.ogg-41a8e6cfd55694e82abeed0f3e996470.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
