@@ -1,20 +1,17 @@
 extends Control
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var game_setup_scene = preload("res://FOWindow.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	pass
 
 
 func _on_QuitBtn_pressed():
 	get_tree().quit()
+
+
+func _on_SinglePlayerBtn_pressed():
+	add_child(game_setup_scene.instance())

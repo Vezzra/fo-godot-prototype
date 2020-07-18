@@ -151,4 +151,5 @@ Title = "Quit"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 autoplay = true
+[connection signal="pressed" from="MainMenu/VBoxContainer/SinglePlayerBtn" to="." method="_on_SinglePlayerBtn_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/QuitBtn" to="." method="_on_QuitBtn_pressed"]
