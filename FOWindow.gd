@@ -1,6 +1,9 @@
 tool
 
 
+class_name FOWindow
+
+
 extends NinePatchRect
 
 

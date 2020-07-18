@@ -1,7 +1,7 @@
 extends Control
 
 
-onready var game_setup_scene = preload("res://FOWindow.tscn")
+onready var game_setup_scene = preload("res://GameSetup.tscn")
 
 
 # Called when the node enters the scene tree for the first time.

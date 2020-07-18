@@ -44,3 +44,6 @@ margin_left = -20.0
 margin_top = -20.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
