@@ -9,7 +9,7 @@ extends NinePatchRect
 
 export var Title: String = "Window Title" setget set_title
 
-enum {NONE, RESIZE, DRAG}
+enum {NONE, RESIZE, DRAG, PINNED}
 var state = NONE
 var mouse_pos_offset: Vector2
 
@@ -51,3 +51,10 @@ func _input(event):
 func set_title(new_title):
 	Title = new_title
 	$Title.text = Title
+
+
+func _on_PinWidget_toggled(button_pressed):
+	if button_pressed:
+		state = PINNED
+	else:
+		state = NONE
