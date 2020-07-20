@@ -14,4 +14,11 @@ func _on_QuitBtn_pressed():
 
 
 func _on_SinglePlayerBtn_pressed():
-	add_child(game_setup_scene.instance())
+	var game_setup_dlg = game_setup_scene.instance()
+	$Popup.add_child(game_setup_dlg)
+	game_setup_dlg.connect("closed", self, "_on_GameSetupDlg_closed")
+	$Popup.popup()
+
+
+func _on_GameSetupDlg_closed():
+	$Popup.hide()
