@@ -9,12 +9,12 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "NinePatchRect",
+"base": "Reference",
 "class": "FOWindow",
 "language": "GDScript",
 "path": "res://FOWindow.gd"
 }, {
-"base": "TextureButton",
+"base": "Reference",
 "class": "MainMenuBtn",
 "language": "GDScript",
 "path": "res://MainMenuBtn.gd"
