@@ -76,3 +76,33 @@ func _ready():
         var sp_tex: ImageTexture = ImageTexture.new()
         sp_tex.load(sp_files[species])
         species_textures[species] = sp_tex
+
+
+func galaxy_calc_positions(size, radius):
+    # Calculate positions for the disc galaxy shape.
+    var positions = []
+    
+    for _i in range(size):
+        var attempts: int = 100
+        var too_close = false
+        var new_pos: Vector2
+        
+        while attempts:
+            attempts -= 1
+            var dist = rand_range(0.0, radius)
+            var angle = rand_range(0.0, 6.2831853072)
+            new_pos = Vector2(dist * cos(angle), dist * sin(angle))
+            
+            too_close = false
+            for pos in positions:
+                if new_pos.distance_to(pos) < 5:
+                    too_close = true
+                    break
+            
+            if not too_close:
+                break
+
+        if not too_close:
+            positions.append(new_pos)
+
+    return positions

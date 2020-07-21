@@ -39,6 +39,12 @@ global="*res://global.gd"
 window/size/width=1600
 window/size/height=900
 
+[physics]
+
+3d/active_soft_world=false
+3d/default_gravity=0.0
+3d/default_gravity_vector=Vector3( 0, 0, 0 )
+
 [rendering]
 
 environment/default_clear_color=Color( 0, 0, 0, 1 )
