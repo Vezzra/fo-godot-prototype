@@ -28,23 +28,23 @@ const GA_RANDOM = 3
 
 
 var gs_files = {
-	GS_SPIRAL2: "res://assets/image/gp_spiral2.png",
-	GS_SPIRAL3: "res://assets/image/gp_spiral3.png",
-	GS_SPIRAL4: "res://assets/image/gp_spiral4.png",
-	GS_CLUSTER: "res://assets/image/gp_cluster.png",
-	GS_ELLIPTICAL: "res://assets/image/gp_elliptical.png",
-	GS_DISC: "res://assets/image/gp_disc.png",
-	GS_BOX: "res://assets/image/gp_box.png",
-	GS_IRREGULAR: "res://assets/image/gp_irregular.png",
-	GS_RING: "res://assets/image/gp_ring.png",
-	GS_RANDOM: "res://assets/image/gp_random.png"
+    GS_SPIRAL2: "res://assets/image/gp_spiral2.png",
+    GS_SPIRAL3: "res://assets/image/gp_spiral3.png",
+    GS_SPIRAL4: "res://assets/image/gp_spiral4.png",
+    GS_CLUSTER: "res://assets/image/gp_cluster.png",
+    GS_ELLIPTICAL: "res://assets/image/gp_elliptical.png",
+    GS_DISC: "res://assets/image/gp_disc.png",
+    GS_BOX: "res://assets/image/gp_box.png",
+    GS_IRREGULAR: "res://assets/image/gp_irregular.png",
+    GS_RING: "res://assets/image/gp_ring.png",
+    GS_RANDOM: "res://assets/image/gp_random.png"
 }
 var galaxy_shape_textures = {}
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for gs_shape in gs_files.keys():
-		var gs_tex: ImageTexture = ImageTexture.new()
-		gs_tex.load(gs_files[gs_shape])
-		galaxy_shape_textures[gs_shape] = gs_tex
+    for gs_shape in gs_files.keys():
+        var gs_tex: ImageTexture = ImageTexture.new()
+        gs_tex.load(gs_files[gs_shape])
+        galaxy_shape_textures[gs_shape] = gs_tex

@@ -9,8 +9,8 @@ signal closed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+    pass # Replace with function body.
 
 
 func _on_CloseWidget_pressed():
-	emit_signal("closed")
+    emit_signal("closed")
