@@ -18,3 +18,4 @@ func _ready():
     add_item("Irregular", global.GS_IRREGULAR)
     add_item("Ring", global.GS_RING)
     add_item("Random", global.GS_RANDOM)
+    select(get_item_index(global.GS_DISC))

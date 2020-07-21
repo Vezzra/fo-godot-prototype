@@ -7,4 +7,4 @@ func _ready():
     add_item("Mature", global.GA_MATURE)
     add_item("Ancient", global.GA_ANCIENT)
     add_item("Random", global.GA_RANDOM)
-    select(global.GA_MATURE)
+    select(get_item_index(global.GA_MATURE))

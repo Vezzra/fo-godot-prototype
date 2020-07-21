@@ -5,10 +5,11 @@ const LETTER_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const LETTER_LOWER = "abcdefghijklmnopqrstuvwxyz"
 const LETTER_DIGITS = "1234567890"
 
-const GO_LOW = 0
-const GO_MEDIUM = 1
-const GO_HIGH = 2
-const GO_RANDOM = 3
+const GO_NONE = 0
+const GO_LOW = 1
+const GO_MEDIUM = 2
+const GO_HIGH = 3
+const GO_RANDOM = 4
 
 const GS_SPIRAL2 = 0
 const GS_SPIRAL3 = 1
@@ -26,6 +27,19 @@ const GA_MATURE = 1
 const GA_ANCIENT = 2
 const GA_RANDOM = 3
 
+const AIA_BEGINNER = 0
+const AIA_TURTLE = 1
+const AIA_CAUTIOUS = 2
+const AIA_TYPICAL = 3
+const AIA_AGGRESSIVE = 4
+const AIA_MANIACAL = 5
+
+const SP_HUMAN = 0
+const SP_LAENFA = 1
+const SP_SCYLIOR = 2
+const SP_EGASSEM = 3
+const SP_TRITH = 4
+
 
 var gs_files = {
     GS_SPIRAL2: "res://assets/image/gp_spiral2.png",
@@ -41,6 +55,15 @@ var gs_files = {
 }
 var galaxy_shape_textures = {}
 
+var sp_files = {
+    SP_HUMAN: "res://assets/image/species/human.png",
+    SP_LAENFA: "res://assets/image/species/laenfa.png",
+    SP_SCYLIOR: "res://assets/image/species/scylior.png",
+    SP_EGASSEM: "res://assets/image/species/egassem.png",
+    SP_TRITH: "res://assets/image/species/trith.png"
+   }
+var species_textures = {}
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -48,3 +71,8 @@ func _ready():
         var gs_tex: ImageTexture = ImageTexture.new()
         gs_tex.load(gs_files[gs_shape])
         galaxy_shape_textures[gs_shape] = gs_tex
+
+    for species in sp_files.keys():
+        var sp_tex: ImageTexture = ImageTexture.new()
+        sp_tex.load(sp_files[species])
+        species_textures[species] = sp_tex

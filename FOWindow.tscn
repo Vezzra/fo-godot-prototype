@@ -18,6 +18,7 @@ font_data = ExtResource( 3 )
 margin_right = 291.0
 margin_bottom = 252.0
 rect_min_size = Vector2( 291, 252 )
+rect_clip_content = true
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 1 )

@@ -42,7 +42,10 @@ func _input(event):
     elif event is InputEventMouseMotion:
         match state:
             DRAG:
-                set_position(get_global_mouse_position() - mouse_pos_offset)
+                var pos = get_global_mouse_position() - mouse_pos_offset
+                if pos.y < 0:
+                    pos.y = 0
+                set_position(pos)
             
             RESIZE:
                 set_size(get_global_mouse_position() - mouse_pos_offset - get_global_rect().position)
