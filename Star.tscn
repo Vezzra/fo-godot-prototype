@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=1]
 params_specular_mode = 4
 albedo_color = Color( 0, 0, 0, 1 )
 emission_enabled = true
@@ -11,5 +11,5 @@ emission_on_uv2 = false
 
 [node name="Star" type="CSGSphere"]
 cast_shadow = 0
-radius = 0.5
-material = SubResource( 3 )
+radius = 0.2
+material = SubResource( 1 )

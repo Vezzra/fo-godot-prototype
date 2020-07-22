@@ -40,6 +40,8 @@ const SP_SCYLIOR = 2
 const SP_EGASSEM = 3
 const SP_TRITH = 4
 
+const MIN_SYS_DIST = 2
+
 
 var gs_files = {
     GS_SPIRAL2: "res://assets/image/gp_spiral2.png",
@@ -95,7 +97,7 @@ func galaxy_calc_positions(size, radius):
             
             too_close = false
             for pos in positions:
-                if new_pos.distance_to(pos) < 5:
+                if new_pos.distance_to(pos) < MIN_SYS_DIST:
                     too_close = true
                     break
             
