@@ -41,6 +41,7 @@ const SP_EGASSEM = 3
 const SP_TRITH = 4
 
 const MIN_SYS_DIST = 2
+const MAX_STARLANE_LENGTH = 15
 
 
 var gs_files = {
@@ -67,6 +68,54 @@ var sp_files = {
 var species_textures = {}
 
 
+class Starlane:
+    var source: int
+    var dest: int
+    
+    func _init(a_source, a_dest):
+        source = a_source
+        dest = a_dest
+
+
+class Galaxy extends AStar:
+    var starlanes = []
+    
+    func calc_positions(size, radius):
+        # Calculate positions for the disc galaxy shape.
+        for i in range(size):
+            var attempts: int = 100
+            var too_close = false
+            var new_pos: Vector3
+            
+            while attempts:
+                attempts -= 1
+                var dist = rand_range(0.0, radius)
+                var angle = rand_range(0.0, 6.2831853072)
+                new_pos = Vector3(dist * cos(angle), 0, dist * sin(angle))
+                
+                var nearest_neighbor = get_closest_point(new_pos)
+                if nearest_neighbor < 0:
+                    too_close = false
+                    break
+                elif new_pos.distance_to(get_point_position(nearest_neighbor)) < MIN_SYS_DIST:
+                    too_close = true
+                else:
+                    too_close = false
+                    break
+                
+            if not too_close:
+                add_point(i, new_pos)
+    
+    func generate_starlanes():
+        for source in get_points():
+            for dest in get_points():
+                if dest <= source:
+                    continue
+                if randf() > get_point_position(dest).distance_to(get_point_position(source)) / MAX_STARLANE_LENGTH:
+                    connect_points(source, dest)
+                    starlanes.append(Starlane.new(source, dest))
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     for gs_shape in gs_files.keys():
@@ -78,33 +127,3 @@ func _ready():
         var sp_tex: ImageTexture = ImageTexture.new()
         sp_tex.load(sp_files[species])
         species_textures[species] = sp_tex
-
-
-func galaxy_calc_positions(size, radius):
-    # Calculate positions for the disc galaxy shape.
-    var positions = []
-    
-    for _i in range(size):
-        var attempts: int = 100
-        var too_close = false
-        var new_pos: Vector2
-        
-        while attempts:
-            attempts -= 1
-            var dist = rand_range(0.0, radius)
-            var angle = rand_range(0.0, 6.2831853072)
-            new_pos = Vector2(dist * cos(angle), dist * sin(angle))
-            
-            too_close = false
-            for pos in positions:
-                if new_pos.distance_to(pos) < MIN_SYS_DIST:
-                    too_close = true
-                    break
-            
-            if not too_close:
-                break
-
-        if not too_close:
-            positions.append(new_pos)
-
-    return positions

@@ -1,10 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://GalaxyMapCamera.gd" type="Script" id=1]
 [ext_resource path="res://GalaxyMap.gd" type="Script" id=2]
 [ext_resource path="res://StarField.gd" type="Script" id=3]
 
+[sub_resource type="ProceduralSky" id=2]
+
 [sub_resource type="Environment" id=1]
+background_sky = SubResource( 2 )
 
 [node name="GalaxyMap" type="Spatial"]
 script = ExtResource( 2 )

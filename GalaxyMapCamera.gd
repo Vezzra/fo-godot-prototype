@@ -37,10 +37,7 @@ func _input(event):
 
 
 func update_position():
-    if angle_h < 0:
-        angle_h += 2 * PI
-    elif angle_h > 2 * PI:
-        angle_h -= 2 * PI
+    angle_h = fmod(angle_h, 2 * PI)
     angle_v = clamp(angle_v, ANGLE_V_LIMIT, PI / 2 - ANGLE_V_LIMIT)
     dist = clamp(dist, 10, 1000)
 
