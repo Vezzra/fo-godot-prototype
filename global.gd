@@ -40,7 +40,7 @@ const SP_SCYLIOR = 2
 const SP_EGASSEM = 3
 const SP_TRITH = 4
 
-const MIN_SYS_DIST = 2
+const MIN_SYS_DIST = 1
 const MAX_STARLANE_LENGTH = 15
 
 
@@ -75,11 +75,100 @@ class Starlane:
     func _init(a_source, a_dest):
         source = a_source
         dest = a_dest
+        if not valid():
+            print("WARNING: Created starlane where source and destination system are the same")
+    
+    func valid():
+        return (source != dest)
 
+
+class StarSystem:
+    var id: int
+    var pos: Vector3
+    var starlanes: Array
+    
+    func _init(a_id: int, a_pos: Vector3):
+        id = a_id
+        pos = a_pos
+        starlanes = []
+    
+    func add_starlane(starlane: Starlane):
+        if not starlane.valid():
+            print("ERROR: Attemting to add invalid starlane")
+            return
+        
+        var already_linked_sys = get_linked_systems()
+        if (starlane.source in already_linked_sys) or (starlane.dest in already_linked_sys):
+            print("WARNING: Attempting to add starlane that already exists to system")
+            return
+            
+        if (starlane.source == id) or (starlane.dest == id):
+            starlanes.append(starlane)
+        else:
+            print("ERROR: Attempting to add starlane to system that does not start or end there")
+    
+    func get_linked_systems():
+        var linked_sys = []
+        for starlane in starlanes:
+            if starlane.source == id:
+                linked_sys.append(starlane.dest)
+            elif starlane.dest == id:
+                linked_sys.append(starlane.source)
+        return linked_sys
+    
 
 class Galaxy extends AStar:
+    var systems = {}
     var starlanes = []
     
+    func add_system(sys: StarSystem):
+        systems[sys.id] = sys
+        add_point(sys.id, sys.pos)
+    
+    func add_starlane(starlane: Starlane):
+        if not ((starlane.source in systems.keys()) and (starlane.dest in systems.keys())):
+            print("ERROR: Attempting to add starlane to non-existing systems")
+            return
+        
+        var ssys: StarSystem = systems[starlane.source]
+        var ssys_linked_sys = ssys.get_linked_systems()
+        var dsys: StarSystem = systems[starlane.dest]
+        var dsys_linked_sys = dsys.get_linked_systems()
+        
+        if (ssys.id in dsys_linked_sys) and (not dsys.id in ssys_linked_sys) or (dsys.id in ssys_linked_sys) and (not ssys.id in dsys_linked_sys):
+            print("ERROR: Found corrupted starlane lists when attempting to add starlane to system")
+            return
+        
+        ssys.add_starlane(starlane)
+        dsys.add_starlane(starlane)
+        starlanes.append(starlane)
+        connect_points(starlane.source, starlane.dest)
+    
+    func get_all_sys_connected_to(sys_id, connected_sys_list: Array = []):
+        if sys_id in connected_sys_list:
+            return
+        
+        connected_sys_list.append(sys_id)
+        var this_sys: StarSystem = systems[sys_id]
+        
+        for ssid in this_sys.get_linked_systems():
+            if ssid in connected_sys_list:
+                continue
+            get_all_sys_connected_to(ssid, connected_sys_list)
+        
+        return connected_sys_list
+    
+    func get_islands():
+        var islands = []
+        var already_assigned_sys = []
+        for ssid in systems.keys():
+            if ssid in already_assigned_sys:
+                continue
+            var island = get_all_sys_connected_to(ssid)
+            islands.append(island)
+            already_assigned_sys += island
+        return islands
+
     func calc_positions(size, radius):
         # Calculate positions for the disc galaxy shape.
         for i in range(size):
@@ -104,16 +193,56 @@ class Galaxy extends AStar:
                     break
                 
             if not too_close:
-                add_point(i, new_pos)
+                add_system(StarSystem.new(i, new_pos))
     
     func generate_starlanes():
-        for source in get_points():
-            for dest in get_points():
-                if dest <= source:
-                    continue
-                if randf() > get_point_position(dest).distance_to(get_point_position(source)) / MAX_STARLANE_LENGTH:
-                    connect_points(source, dest)
-                    starlanes.append(Starlane.new(source, dest))
+        for ss in systems.values():
+            set_point_disabled(ss.id, true)
+            var dest = get_closest_point(ss.pos, false)
+            set_point_disabled(ss.id, false)
+            if (dest >= 0) and (not dest in ss.get_linked_systems()):
+                add_starlane(Starlane.new(ss.id, dest))
+        
+        var islands = get_islands()
+        var last_amount_of_islands: int = 0
+        while len(islands) != last_amount_of_islands:
+            for island in islands:
+                for ssid in island:
+                    set_point_disabled(ssid, true)
+                
+                var dist_map = {}
+                var dist_list = []
+                for ssid in island:
+                    var ss: StarSystem = systems[ssid]
+                    var closest_island = get_closest_point(ss.pos)
+                    if closest_island >= 0:
+                        var dist = ss.pos.distance_to(get_point_position(closest_island))
+                        if dist in dist_map.keys():
+                            dist_map[dist].append(ss)
+                        else:
+                            dist_map[dist] = [ss]
+                        dist_list.append(dist)
+                
+                if dist_list:
+                    dist_list.sort()
+                    for ss in dist_map[dist_list[0]]:
+                        add_starlane(Starlane.new(ss.id, get_closest_point(ss.pos)))
+
+                for ssid in island:
+                    set_point_disabled(ssid, false)
+            
+            last_amount_of_islands = len(islands)
+            islands = get_islands()
+        
+        for ss in systems.values():
+            var linked_sys = ss.get_linked_systems()
+            if len(linked_sys) == 1:
+                set_point_disabled(ss.id, true)
+                set_point_disabled(linked_sys[0], true)
+                var closest_neighbor = get_closest_point(ss.pos)
+                add_starlane(Starlane.new(ss.id, closest_neighbor))
+                set_point_disabled(ss.id, false)
+                set_point_disabled(linked_sys[0], false)
 
 
 # Called when the node enters the scene tree for the first time.
