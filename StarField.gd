@@ -14,7 +14,6 @@ func add_pos_as_vertex(st: SurfaceTool, pos):
 func _ready():
     var star_scene = preload("res://Star.tscn")
     
-    print("SF1")
     galaxy.calc_positions(500, 50)
     galaxy.generate_starlanes()
     
