@@ -31,13 +31,16 @@ func _input(event):
                     if $Title.get_global_rect().has_point(mouse_pos):
                         mouse_pos_offset = mouse_pos - get_global_rect().position
                         state = DRAG
+                        get_tree().set_input_as_handled()
                     elif $ResizeWidget.get_global_rect().has_point(mouse_pos):
                         mouse_pos_offset = mouse_pos - get_global_rect().end
                         state = RESIZE
+                        get_tree().set_input_as_handled()
 
             DRAG, RESIZE:
                 if not event.pressed:
                     state = NONE
+                    get_tree().set_input_as_handled()
 
     elif event is InputEventMouseMotion:
         match state:
@@ -46,9 +49,11 @@ func _input(event):
                 if pos.y < 0:
                     pos.y = 0
                 set_position(pos)
+                get_tree().set_input_as_handled()
             
             RESIZE:
                 set_size(get_global_mouse_position() - mouse_pos_offset - get_global_rect().position)
+                get_tree().set_input_as_handled()
 
 
 func set_title(new_title):
