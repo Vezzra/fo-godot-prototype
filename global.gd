@@ -67,6 +67,9 @@ var sp_files = {
    }
 var species_textures = {}
 
+var gs_seed: String = "0"
+var gs_map_size: int = 500
+
 
 class Starlane:
     var source: int

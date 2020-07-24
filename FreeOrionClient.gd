@@ -25,6 +25,7 @@ func _on_SinglePlayerBtn_pressed():
 
 func _on_GameSetupDlg_ok():
     $Popup.hide()
+    get_tree().change_scene("res://GalaxyMap.tscn")
 
 
 func _on_GameSetupDlg_cancel():

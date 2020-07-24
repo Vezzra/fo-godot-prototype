@@ -175,6 +175,9 @@ margin_left = 267.0
 margin_right = 525.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
+text = "Medium"
+items = [ "Low", null, false, 1, null, "Medium", null, false, 2, null, "High", null, false, 3, null, "Random", null, false, 4, null ]
+selected = 1
 script = ExtResource( 11 )
 
 [node name="PlanetDensity" type="HBoxContainer" parent="ToplevelContainer/LeftContainer" index="5"]
@@ -197,6 +200,9 @@ margin_left = 267.0
 margin_right = 525.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
+text = "Medium"
+items = [ "Low", null, false, 1, null, "Medium", null, false, 2, null, "High", null, false, 3, null, "Random", null, false, 4, null ]
+selected = 1
 script = ExtResource( 11 )
 
 [node name="SpecialsFrequency" type="HBoxContainer" parent="ToplevelContainer/LeftContainer" index="6"]
@@ -219,6 +225,9 @@ margin_left = 267.0
 margin_right = 525.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
+text = "Medium"
+items = [ "None", null, false, 0, null, "Low", null, false, 1, null, "Medium", null, false, 2, null, "High", null, false, 3, null, "Random", null, false, 4, null ]
+selected = 2
 script = ExtResource( 11 )
 WithNoneOption = true
 
@@ -242,6 +251,9 @@ margin_left = 267.0
 margin_right = 525.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
+text = "Medium"
+items = [ "None", null, false, 0, null, "Low", null, false, 1, null, "Medium", null, false, 2, null, "High", null, false, 3, null, "Random", null, false, 4, null ]
+selected = 2
 script = ExtResource( 11 )
 WithNoneOption = true
 
@@ -265,6 +277,9 @@ margin_left = 267.0
 margin_right = 525.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
+text = "Medium"
+items = [ "None", null, false, 0, null, "Low", null, false, 1, null, "Medium", null, false, 2, null, "High", null, false, 3, null, "Random", null, false, 4, null ]
+selected = 2
 script = ExtResource( 11 )
 WithNoneOption = true
 

@@ -18,6 +18,8 @@ func _on_CloseWidget_pressed():
 
 
 func _on_OKBtn_pressed():
+    global.gs_seed = $ToplevelContainer/LeftContainer/Seed/LineEdit.text
+    global.gs_map_size = $ToplevelContainer/LeftContainer/Systems/SpinBox.value
     emit_signal("ok")
 
 
