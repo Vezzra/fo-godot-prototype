@@ -18,6 +18,7 @@ func _ready():
     var width = 2.0 * sqrt(global.gs_map_size)
     galaxy.calc_positions(global.gs_map_size, width)
     galaxy.generate_starlanes()
+    global.galaxy = galaxy
     
     for sys_id in galaxy.get_points():
         var star = star_scene.instance()

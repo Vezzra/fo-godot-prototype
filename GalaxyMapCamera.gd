@@ -16,6 +16,9 @@ var moving = false
 var panning = false
 
 
+signal updated(origin, angle_h, angle_v, dist)
+
+
 func _ready():
     update_position()
 
@@ -52,10 +55,11 @@ func _input(event):
 func update_position():
     angle_h = fmod(angle_h, 2 * PI)
     angle_v = clamp(angle_v, ANGLE_V_LIMIT, PI / 2 - ANGLE_V_LIMIT)
-    dist = clamp(dist, 10, 1000)
+    dist = clamp(dist, 1, 1000)
 
     var f = cos(angle_v)
     var x = dist * cos(angle_h) * f
     var y = dist * sin(angle_v)
     var z = dist * sin(angle_h) * f
     look_at_from_position(origin + Vector3(x, y, z), origin, Vector3(0, 1, 0))
+    emit_signal("updated", translation, angle_h, angle_v, dist)

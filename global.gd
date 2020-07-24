@@ -70,6 +70,8 @@ var species_textures = {}
 var gs_seed: String = "0"
 var gs_map_size: int = 500
 
+var galaxy: Galaxy
+
 
 class Starlane:
     var source: int
