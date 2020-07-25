@@ -257,7 +257,7 @@ func _ready():
         gs_tex.load(gs_files[gs_shape])
         galaxy_shape_textures[gs_shape] = gs_tex
 
-    for species in sp_files.keys():
-        var sp_tex: ImageTexture = ImageTexture.new()
-        sp_tex.load(sp_files[species])
-        species_textures[species] = sp_tex
+#    for species in sp_files.keys():
+#        var sp_tex: ImageTexture = ImageTexture.new()
+#        sp_tex.load(sp_files[species])
+#        species_textures[species] = sp_tex

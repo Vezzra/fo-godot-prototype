@@ -8,6 +8,7 @@ extends OptionButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    clear()
     add_item("Spiral, 2-arm", global.GS_SPIRAL2)
     add_item("Spiral, 3-arm", global.GS_SPIRAL3)
     add_item("Spiral, 4-arm", global.GS_SPIRAL4)

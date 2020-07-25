@@ -2,8 +2,8 @@
 
 [ext_resource path="res://assets/image/logo.png" type="Texture" id=1]
 [ext_resource path="res://assets/image/splash.png" type="Texture" id=2]
-[ext_resource path="res://assets/image/frames/black-and-gold-background-4930304_1920.jpg" type="Texture" id=3]
-[ext_resource path="res://resources/fonts/Roboto-Regular.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/image/frames/FOWindowFrame2.png" type="Texture" id=3]
+[ext_resource path="res://resources/FOStdTheme.tres" type="Theme" id=4]
 [ext_resource path="res://FreeOrionClient.gd" type="Script" id=5]
 [ext_resource path="res://MainMenuBtn.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/audio/artificial_intelligence_v3.ogg" type="AudioStream" id=7]
@@ -11,6 +11,7 @@
 [node name="GUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 4 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -41,112 +42,108 @@ anchor_left = 0.65
 anchor_top = 0.2
 anchor_right = 0.65
 anchor_bottom = 0.2
-margin_right = 500.0
-margin_bottom = 1000.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_right = 256.0
+margin_bottom = 536.0
+rect_min_size = Vector2( 256, 256 )
 texture = ExtResource( 3 )
-patch_margin_left = 250
-patch_margin_top = 250
-patch_margin_right = 250
-patch_margin_bottom = 250
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MainMenuLabel" type="Label" parent="MainMenu"]
-anchor_top = 0.08
-anchor_right = 1.0
-anchor_bottom = 0.08
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 4 )
-custom_colors/font_color_shadow = Color( 0.72549, 0.662745, 0.145098, 1 )
-custom_constants/shadow_as_outline = 1
-text = "FreeOrion Main Menu"
-align = 1
-valign = 1
+patch_margin_left = 5
+patch_margin_top = 25
+patch_margin_right = 5
+patch_margin_bottom = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
-anchor_left = 0.1
-anchor_top = 0.14
-anchor_right = 0.9
-anchor_bottom = 0.95
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = 30.0
+margin_right = -30.0
+margin_bottom = -10.0
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ContinueBtn" parent="MainMenu/VBoxContainer" instance=ExtResource( 6 )]
-margin_left = 50.0
-margin_right = 350.0
+margin_right = 196.0
+margin_bottom = 40.0
+size_flags_vertical = 3
 Title = "Continue"
 
 [node name="SinglePlayerBtn" parent="MainMenu/VBoxContainer" instance=ExtResource( 6 )]
-margin_left = 50.0
-margin_top = 80.0
-margin_right = 350.0
-margin_bottom = 150.0
+margin_top = 50.0
+margin_right = 196.0
+margin_bottom = 90.0
+size_flags_vertical = 3
 Title = "Single Player"
 
 [node name="QuickstartBtn" parent="MainMenu/VBoxContainer" instance=ExtResource( 6 )]
-margin_left = 50.0
-margin_top = 160.0
-margin_right = 350.0
-margin_bottom = 230.0
-Title = "Quick Start"
+margin_top = 100.0
+margin_right = 196.0
+margin_bottom = 140.0
+size_flags_vertical = 3
+Title = "Quickstart"
 
 [node name="MultiplayerBtn" parent="MainMenu/VBoxContainer" instance=ExtResource( 6 )]
-margin_left = 50.0
-margin_top = 240.0
-margin_right = 350.0
-margin_bottom = 310.0
+margin_top = 150.0
+margin_right = 196.0
+margin_bottom = 190.0
+size_flags_vertical = 3
 Title = "Multiplayer"
 
 [node name="LoadGameBtn" parent="MainMenu/VBoxContainer" instance=ExtResource( 6 )]
-margin_left = 50.0
-margin_top = 320.0
-margin_right = 350.0
-margin_bottom = 390.0
+margin_top = 200.0
+margin_right = 196.0
+margin_bottom = 240.0
+size_flags_vertical = 3
 Title = "Load Game"
 
 [node name="OptionsBtn" parent="MainMenu/VBoxContainer" instance=ExtResource( 6 )]
-margin_left = 50.0
-margin_top = 400.0
-margin_right = 350.0
-margin_bottom = 470.0
+margin_top = 250.0
+margin_right = 196.0
+margin_bottom = 290.0
+size_flags_vertical = 3
 Title = "Options"
 
 [node name="PediaBtn" parent="MainMenu/VBoxContainer" instance=ExtResource( 6 )]
-margin_left = 50.0
-margin_top = 480.0
-margin_right = 350.0
-margin_bottom = 550.0
+margin_top = 300.0
+margin_right = 196.0
+margin_bottom = 340.0
+size_flags_vertical = 3
 Title = "Pedia"
 
 [node name="AboutBtn" parent="MainMenu/VBoxContainer" instance=ExtResource( 6 )]
-margin_left = 50.0
-margin_top = 560.0
-margin_right = 350.0
-margin_bottom = 630.0
+margin_top = 350.0
+margin_right = 196.0
+margin_bottom = 390.0
+size_flags_vertical = 3
 Title = "About"
 
 [node name="CreditsBtn" parent="MainMenu/VBoxContainer" instance=ExtResource( 6 )]
-margin_left = 50.0
-margin_top = 640.0
-margin_right = 350.0
-margin_bottom = 710.0
+margin_top = 400.0
+margin_right = 196.0
+margin_bottom = 440.0
+size_flags_vertical = 3
 Title = "Credits"
 
 [node name="QuitBtn" parent="MainMenu/VBoxContainer" instance=ExtResource( 6 )]
-margin_left = 50.0
-margin_top = 720.0
-margin_right = 350.0
-margin_bottom = 790.0
+margin_top = 450.0
+margin_right = 196.0
+margin_bottom = 489.0
 Title = "Quit"
+
+[node name="Label" type="Label" parent="MainMenu"]
+anchor_right = 1.0
+margin_left = 5.0
+margin_right = -5.0
+margin_bottom = 20.0
+text = "FreeOrion Main Menu"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )

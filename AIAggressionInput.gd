@@ -3,6 +3,7 @@ extends OptionButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    clear()
     add_item("Beginner Mode", global.AIA_BEGINNER)
     add_item("Turtle", global.AIA_TURTLE)
     add_item("Cautious", global.AIA_CAUTIOUS)

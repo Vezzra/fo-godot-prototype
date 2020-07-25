@@ -4,7 +4,7 @@ tool
 class_name MainMenuBtn
 
 
-extends TextureButton
+extends Button
 
 
 export var Title = "Title" setget set_title

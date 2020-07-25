@@ -31,16 +31,13 @@ func _input(event):
                     if $Title.get_global_rect().has_point(mouse_pos):
                         mouse_pos_offset = mouse_pos - get_global_rect().position
                         state = DRAG
-                        get_tree().set_input_as_handled()
                     elif $ResizeWidget.get_global_rect().has_point(mouse_pos):
                         mouse_pos_offset = mouse_pos - get_global_rect().end
                         state = RESIZE
-                        get_tree().set_input_as_handled()
 
             DRAG, RESIZE:
                 if not event.pressed:
                     state = NONE
-                    get_tree().set_input_as_handled()
 
     elif event is InputEventMouseMotion:
         match state:

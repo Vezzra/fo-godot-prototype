@@ -1,6 +1,3 @@
-tool
-
-
 extends FOWindow
 
 
