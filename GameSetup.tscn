@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://FOWindow.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GameSetup.gd" type="Script" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://assets/image/randomize_mouseover.png" type="Texture" id=5]
 [ext_resource path="res://assets/image/randomize.png" type="Texture" id=6]
 [ext_resource path="res://GalaxyShapeInput.gd" type="Script" id=7]
-[ext_resource path="res://GalaxyShapeTex.gd" type="Script" id=8]
 [ext_resource path="res://SeedInput.gd" type="Script" id=9]
 [ext_resource path="res://GalaxyAgeInput.gd" type="Script" id=10]
 [ext_resource path="res://GalaxySetupOptionInput.gd" type="Script" id=11]
@@ -501,7 +500,6 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
 expand = true
 stretch_mode = 6
-script = ExtResource( 8 )
 
 [node name="TabContainer" type="TabContainer" parent="ToplevelContainer/RightContainer" index="1"]
 margin_top = 212.0
@@ -556,6 +554,6 @@ margin_right = -5.0
 margin_bottom = -5.0
 [connection signal="pressed" from="HBoxContainer/CloseWidget" to="." method="_on_CloseWidget_pressed"]
 [connection signal="pressed" from="ToplevelContainer/LeftContainer/Seed/RandomSeedBtn" to="ToplevelContainer/LeftContainer/Seed/LineEdit" method="_on_RandomSeedBtn_pressed"]
-[connection signal="item_selected" from="ToplevelContainer/LeftContainer/GalaxyShape/OptionButton" to="ToplevelContainer/RightContainer/GalaxyShapeTex" method="_on_OptionButton_item_selected"]
+[connection signal="item_selected" from="ToplevelContainer/LeftContainer/GalaxyShape/OptionButton" to="." method="_on_GalaxyShape_selected"]
 [connection signal="pressed" from="ToplevelContainer/LeftContainer/MarginContainer/OK_Cancel_Buttons/OKBtn" to="." method="_on_OKBtn_pressed"]
 [connection signal="pressed" from="ToplevelContainer/LeftContainer/MarginContainer/OK_Cancel_Buttons/CancelBtn" to="." method="_on_CancelBtn_pressed"]
