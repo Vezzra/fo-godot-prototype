@@ -2,11 +2,17 @@ extends Node2D
 
 
 const SCALE_1_AT = 50.0
+const NAME_FONT_SIZE = 4
+
+
+var font_robo = preload("res://resources/fonts/Roboto-Regular.tres")
+var fonts = {}
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    pass # Replace with function body.
+    for ss in global.galaxy.systems.values():
+        fonts[ss.id] = font_robo.duplicate()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,8 +29,11 @@ func _draw():
             continue
         
         var dec_scale = SCALE_1_AT / (cpos.distance_to(ss.pos))
-        if dec_scale < 0.5:
+        if dec_scale < 1:
             continue
         
         var pos_2d = cam.unproject_position(ss.pos)
-        draw_rect(Rect2(pos_2d + (Vector2(0, -5) * dec_scale), Vector2(6, 3) * dec_scale), Color(0.7, 0.7, 1), true)
+        var font: Font = fonts[ss.id]
+        font.size = NAME_FONT_SIZE * dec_scale
+        var off_x = -len(ss.name)
+        draw_string(font, pos_2d + (Vector2(off_x, 7) * dec_scale), ss.name)

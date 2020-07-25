@@ -10,6 +10,8 @@ signal cancel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    randomize()
+    
     galaxy_shape_textures[global.GS_SPIRAL2] = preload("res://assets/image/gp_spiral2.png")
     galaxy_shape_textures[global.GS_SPIRAL3] = preload("res://assets/image/gp_spiral3.png")
     galaxy_shape_textures[global.GS_SPIRAL4] = preload("res://assets/image/gp_spiral4.png")
