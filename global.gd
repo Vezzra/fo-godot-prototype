@@ -85,7 +85,6 @@ class StarSystem:
         
         var already_linked_sys = get_linked_systems()
         if (starlane.source in already_linked_sys) or (starlane.dest in already_linked_sys):
-            print("WARNING: Attempting to add starlane that already exists to system")
             return
             
         if (starlane.source == id) or (starlane.dest == id):
