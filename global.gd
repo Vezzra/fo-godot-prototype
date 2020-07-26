@@ -47,9 +47,10 @@ const MAX_STARLANE_LENGTH = 15
 var gs_seed: String = "0"
 var gs_map_size: int = 500
 
-var galaxy: Galaxy
-
 var starnames: Array
+
+var galaxy: Galaxy
+var starfield: Spatial
 
 
 class Starlane:
@@ -71,6 +72,7 @@ class StarSystem:
     var pos: Vector3
     var name: String
     var starlanes: Array
+    var spatial: Spatial
     
     func _init(a_id: int, a_pos: Vector3):
         id = a_id

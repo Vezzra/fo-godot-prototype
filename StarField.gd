@@ -12,6 +12,7 @@ func add_pos_as_vertex(st: SurfaceTool, pos):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    global.starfield = self
     var star_scene = preload("res://Star.tscn")
     
     rand_seed(hash(global.gs_seed))
@@ -20,9 +21,10 @@ func _ready():
     galaxy.generate_starlanes()
     global.galaxy = galaxy
     
-    for sys_id in galaxy.get_points():
+    for ss in galaxy.systems.values():
         var star = star_scene.instance()
-        star.translate(galaxy.get_point_position(sys_id))
+        ss.spatial = star
+        star.translate(ss.pos)
         add_child(star)
     
     ig.material_override = load("res://resources/materials/starlane_material.tres")

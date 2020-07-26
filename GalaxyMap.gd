@@ -3,9 +3,5 @@ extends Spatial
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-    pass
+    for ss in global.galaxy.systems.values():
+        ss.spatial.connect("input_event", $Starnames, "_on_Star_input_event")
