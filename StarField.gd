@@ -39,3 +39,17 @@ func _process(delta):
         ig.add_vertex(galaxy.get_point_position(starlane.source))
         ig.add_vertex(galaxy.get_point_position(starlane.dest))
     ig.end()
+
+
+func _on_Star_input_event(camera, event, click_position, click_normal, shape_idx):
+    if not event is InputEventMouseButton:
+        return
+    if not event.button_index == BUTTON_LEFT:
+        return
+    
+    var ssid = global.galaxy.get_closest_point(click_position)
+    if ssid < 0:
+        return
+    
+    $StarSystemSelectionMarker.translation = global.galaxy.systems[ssid].pos
+    $StarSystemSelectionMarker.show()
