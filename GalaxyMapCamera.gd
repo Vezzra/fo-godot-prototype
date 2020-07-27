@@ -1,7 +1,8 @@
 extends Camera
 
 
-const ANGLE_V_LIMIT: float = 0.05
+const ANGLE_V_LIMIT_LOW: float = 0.1
+const ANGLE_V_LIMIT_HIGH: float = PI / 2 - 0.05
 const MOVING_SPEED: float = 0.1
 const PANNING_SPEED: float = 0.02
 const ZOOM_SPEED: float = 0.05
@@ -54,7 +55,7 @@ func _input(event):
 
 func update_position():
     angle_h = fmod(angle_h, 2 * PI)
-    angle_v = clamp(angle_v, ANGLE_V_LIMIT, PI / 2 - ANGLE_V_LIMIT)
+    angle_v = clamp(angle_v, ANGLE_V_LIMIT_LOW, ANGLE_V_LIMIT_HIGH)
     dist = clamp(dist, 1, 1000)
 
     var f = cos(angle_v)
