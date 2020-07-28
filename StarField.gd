@@ -3,11 +3,28 @@ extends Spatial
 
 var ig = ImmediateGeometry.new()
 var galaxy = global.Galaxy.new()
+var fleet_icon = preload("res://FleetIcon.tscn")
 
 
-func add_pos_as_vertex(st: SurfaceTool, pos):
-    st.add_uv(Vector2(pos.x, pos.y))
-    st.add_vertex(pos)
+func place_fleets(num: int):
+    var sys_list: Array = global.galaxy.systems.values().duplicate()
+    sys_list.shuffle()
+    
+    for id in range(num):
+        var ss: global.StarSystem = sys_list.pop_front()
+        var fleet = global.Fleet.new(id, ss)
+        fleet.spatial = fleet_icon.instance()
+        fleet.spatial.fleet = fleet
+        add_child(fleet.spatial)
+        
+        if randf() < 0.5:
+            var neighbors: Array = ss.get_linked_systems()
+            neighbors.shuffle()
+            var dest_sys: global.StarSystem = global.galaxy.systems[neighbors[0]]
+            var dist: float = ss.pos.distance_to(dest_sys.pos)
+            fleet.set_transit(dest_sys, dist * randf())
+        else:
+            fleet.set_stationary()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +43,8 @@ func _ready():
         ss.spatial = star
         star.translate(ss.pos)
         add_child(star)
+    
+    place_fleets(round(global.gs_map_size / 10))
     
     ig.material_override = load("res://resources/materials/starlane_material.tres")
     add_child(ig)
