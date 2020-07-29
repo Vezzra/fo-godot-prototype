@@ -16,6 +16,7 @@ func place_fleets(num: int):
         fleet.spatial = fleet_icon.instance()
         fleet.spatial.fleet = fleet
         add_child(fleet.spatial)
+        global.galaxy.fleets[fleet.id] = fleet
         
         if randf() < 0.5:
             var neighbors: Array = ss.get_linked_systems()

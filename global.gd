@@ -146,6 +146,7 @@ class Fleet:
 class Galaxy extends AStar:
     var systems = {}
     var starlanes = []
+    var fleets = {}
     
     func add_system(sys: StarSystem):
         systems[sys.id] = sys

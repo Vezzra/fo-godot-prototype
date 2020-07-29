@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://GalaxyMapCamera.gd" type="Script" id=1]
 [ext_resource path="res://GalaxyMap.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Starnames.gd" type="Script" id=4]
 [ext_resource path="res://assets/audio/artificial_intelligence_v3.ogg" type="AudioStream" id=5]
 [ext_resource path="res://StarSystemSelectionMarker.tscn" type="PackedScene" id=6]
+[ext_resource path="res://FleetWindow.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -36,3 +37,6 @@ script = ExtResource( 4 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 autoplay = true
+
+[node name="FleetWindow" parent="." instance=ExtResource( 7 )]
+visible = false
