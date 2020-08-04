@@ -2,3 +2,5 @@
 /.import/
 /export/
 /bin/
+/cpp/*.os
+/.sconsign.dblite
