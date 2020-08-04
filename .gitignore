@@ -3,5 +3,5 @@
 /export/
 /bin/
 /cpp/*.os
-/godot-cpp/**/*.import
+/godot-cpp
 /.sconsign.dblite
