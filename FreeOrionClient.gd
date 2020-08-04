@@ -10,6 +10,8 @@ func _ready():
     $Popup.add_child(game_setup_dlg)
     game_setup_dlg.connect("ok", self, "_on_GameSetupDlg_ok")
     game_setup_dlg.connect("cancel", self, "_on_GameSetupDlg_cancel")
+    
+    $Node.connect("ping", self, "_on_Node_ping")
 
 
 func _on_QuitBtn_pressed():
@@ -30,3 +32,7 @@ func _on_GameSetupDlg_ok():
 
 func _on_GameSetupDlg_cancel():
     $Popup.hide()
+
+
+func _on_Node_ping():
+    print("Received ping signal from C++ GDNative library code")

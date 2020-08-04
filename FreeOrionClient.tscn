@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/image/logo.png" type="Texture" id=1]
 [ext_resource path="res://assets/image/splash.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://FreeOrionClient.gd" type="Script" id=5]
 [ext_resource path="res://MainMenuBtn.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/audio/artificial_intelligence_v3.ogg" type="AudioStream" id=7]
+[ext_resource path="res://gdcpptest.gdns" type="Script" id=8]
 
 [node name="GUI" type="Control"]
 anchor_right = 1.0
@@ -152,5 +153,8 @@ autoplay = true
 [node name="Popup" type="Popup" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource( 8 )
 [connection signal="pressed" from="MainMenu/VBoxContainer/SinglePlayerBtn" to="." method="_on_SinglePlayerBtn_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/QuitBtn" to="." method="_on_QuitBtn_pressed"]
