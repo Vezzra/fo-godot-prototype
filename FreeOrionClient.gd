@@ -2,6 +2,7 @@ extends Control
 
 
 var game_setup_dlg: Control
+var pings: int = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -35,4 +36,5 @@ func _on_GameSetupDlg_cancel():
 
 
 func _on_Node_ping():
-    print("Received ping signal from C++ GDNative library code")
+    pings += 1
+    print("Received ping#", pings, " signal from C++ GDNative library code")
