@@ -7,10 +7,9 @@ using namespace godot;
 std::atomic_bool quit = false;
 
 void do_the_ping(Node* n) {
-    while(true) {
+    while(!quit) {
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         n->emit_signal("ping");
-        if(quit) break;
     }
 }
 
