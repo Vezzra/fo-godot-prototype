@@ -13,6 +13,8 @@ func _ready():
     game_setup_dlg.connect("cancel", self, "_on_GameSetupDlg_cancel")
     
     $Node.connect("ping", self, "_on_Node_ping")
+    var systems: int = $Node.optionsDB._get_option_int("setup.star.count")
+    print("Systems from optionsDB ", systems)
 
 
 func _on_QuitBtn_pressed():
