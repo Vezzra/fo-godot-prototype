@@ -37,6 +37,18 @@ func _on_GameSetupDlg_cancel():
     $Popup.hide()
 
 
-func _on_Node_ping():
+func _on_Node_ping(message: String):
     pings += 1
-    print("Received ping#", pings, " signal from C++ GDNative library code")
+    print("Received message#", pings, " from C++ GDNative library code ", message)
+
+
+func _on_MultiplayerBtn_pressed():
+    var connected: bool = $Node.networking._is_connected()
+    if connected:
+        print("Already connected")
+    else:
+        connected = $Node.networking._connect_to_server("localhost", "GodotPlayer")
+        if not connected:
+            print("Cannot connect")
+        else:
+            pass
