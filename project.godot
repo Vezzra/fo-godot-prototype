@@ -26,7 +26,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="FreeOrion Godot"
+config/name="FreeOrion Godot Prototype"
 run/main_scene="res://FreeOrionClient.tscn"
 config/icon="res://assets/image/FO_Icon_256x256.png"
 
