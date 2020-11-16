@@ -13,6 +13,7 @@ func _ready():
     game_setup_dlg.connect("cancel", self, "_on_GameSetupDlg_cancel")
     
     $Node.connect("ping", self, "_on_Node_ping")
+    $Node.connect("auth_request", self, "_on_Node_auth_request")
     var systems: int = $Node.optionsDB._get_option_int("setup.star.count")
     print("Systems from optionsDB ", systems)
 
@@ -40,6 +41,9 @@ func _on_GameSetupDlg_cancel():
 func _on_Node_ping(message: String):
     pings += 1
     print("Received message#", pings, " from C++ GDNative library code ", message)
+
+func _on_Node_auth_request(player_name: String, auth: String):
+    $Node.networking._auth_response(player_name, "1")
 
 
 func _on_MultiplayerBtn_pressed():
