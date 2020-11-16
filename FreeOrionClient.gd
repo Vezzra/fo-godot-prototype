@@ -30,10 +30,12 @@ func _on_SinglePlayerBtn_pressed():
     game_setup_dlg.set_position(Vector2(pos_x, pos_y))
     $Popup.popup()
 
+func _on_QuickstartBtn_pressed():
+    $Node._new_single_player_game(true)
 
 func _on_GameSetupDlg_ok():
     $Popup.hide()
-    get_tree().change_scene("res://GalaxyMap.tscn")
+    $Node._new_single_player_game(false)
 
 
 func _on_GameSetupDlg_cancel():
