@@ -47,8 +47,6 @@ const MAX_STARLANE_LENGTH = 15
 var gs_seed: String = "0"
 var gs_map_size: int = 500
 
-var starnames: Array
-
 var galaxy: Galaxy
 var starfield: Spatial
 
@@ -77,7 +75,7 @@ class StarSystem:
     func _init(a_id: int, a_pos: Vector3):
         id = a_id
         pos = a_pos
-        name = global.starnames.pop_front()
+        name = "<remove me>"
         starlanes = []
     
     func add_starlane(starlane: Starlane):
@@ -270,16 +268,3 @@ class Galaxy extends AStar:
                 add_starlane(Starlane.new(ss.id, closest_neighbor))
                 set_point_disabled(ss.id, false)
                 set_point_disabled(linked_sys[0], false)
-
-
-func _ready():
-    var name_file: File = File.new()
-    starnames = []
-    
-    name_file.open("res://assets/text/starnames.txt", File.READ)
-    while not name_file.eof_reached():
-        var starname = name_file.get_line()
-        if starname:
-            starnames.append(starname)
-    
-    starnames.shuffle()

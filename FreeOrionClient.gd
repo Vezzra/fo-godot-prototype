@@ -52,6 +52,7 @@ func _on_Node_empire_status(status: int, about_empire_id: int):
 
 func _on_Node_start_game(is_new_game: bool):
     print("Received start game. New ", is_new_game)
+    get_tree().change_scene("res://GalaxyMap.tscn")
 
 func _on_MultiplayerBtn_pressed():
     var connected: bool = $Node.networking._is_connected()
