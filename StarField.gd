@@ -11,7 +11,7 @@ func place_fleets(num: int):
     sys_list.shuffle()
     
     for id in range(num):
-        var ss: global.StarSystem = sys_list.pop_front()
+        var ss: Object = sys_list.pop_front()
         var fleet = global.Fleet.new(id, ss)
         fleet.spatial = fleet_icon.instance()
         fleet.spatial.fleet = fleet
@@ -21,7 +21,7 @@ func place_fleets(num: int):
         if randf() < 0.5:
             var neighbors: Array = ss.get_linked_systems()
             neighbors.shuffle()
-            var dest_sys: global.StarSystem = global.galaxy.systems[neighbors[0]]
+            var dest_sys: Object = global.galaxy.systems[neighbors[0]]
             var dist: float = ss.pos.distance_to(dest_sys.pos)
             fleet.set_transit(dest_sys, dist * randf())
         else:
@@ -32,11 +32,8 @@ func place_fleets(num: int):
 func _ready():
     global.starfield = self
     var star_scene = preload("res://Star.tscn")
-    
-    rand_seed(hash(global.gs_seed))
-    var width = 2.0 * sqrt(global.gs_map_size)
-    galaxy.calc_positions(global.gs_map_size, width)
-    galaxy.generate_starlanes()
+
+    #galaxy.generate_starlanes()
     global.galaxy = galaxy
     
     for ss in galaxy.systems.values():
@@ -45,7 +42,7 @@ func _ready():
         star.translate(ss.pos)
         add_child(star)
     
-    place_fleets(round(global.gs_map_size / 10))
+    #place_fleets(round(global.gs_map_size / 10))
     
     ig.material_override = load("res://resources/materials/starlane_material.tres")
     add_child(ig)

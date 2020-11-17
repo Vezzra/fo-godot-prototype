@@ -44,11 +44,9 @@ const MIN_SYS_DIST = 1
 const MAX_STARLANE_LENGTH = 15
 
 
-var gs_seed: String = "0"
-var gs_map_size: int = 500
-
 var galaxy: Galaxy
 var starfield: Spatial
+var freeorion: Node
 
 
 class Starlane:
@@ -64,60 +62,22 @@ class Starlane:
     func valid():
         return (source != dest)
 
-
-class StarSystem:
-    var id: int
-    var pos: Vector3
-    var name: String
-    var starlanes: Array
-    var spatial: Spatial
-    
-    func _init(a_id: int, a_pos: Vector3):
-        id = a_id
-        pos = a_pos
-        name = "<remove me>"
-        starlanes = []
-    
-    func add_starlane(starlane: Starlane):
-        if not starlane.valid():
-            print("ERROR: Attemting to add invalid starlane")
-            return
-        
-        var already_linked_sys = get_linked_systems()
-        if (starlane.source in already_linked_sys) or (starlane.dest in already_linked_sys):
-            return
-            
-        if (starlane.source == id) or (starlane.dest == id):
-            starlanes.append(starlane)
-        else:
-            print("ERROR: Attempting to add starlane to system that does not start or end there")
-    
-    func get_linked_systems():
-        var linked_sys = []
-        for starlane in starlanes:
-            if starlane.source == id:
-                linked_sys.append(starlane.dest)
-            elif starlane.dest == id:
-                linked_sys.append(starlane.source)
-        return linked_sys
-
-
 class Fleet:
     var id: int
     var pos: Vector3
-    var current_sys: StarSystem
-    var dest_sys: StarSystem
+    var current_sys: Object
+    var dest_sys: Object
     var dist_travelled: float
     var spatial: Spatial
     
-    func _init(a_id: int, at_sys: StarSystem):
+    func _init(a_id: int, at_sys: Object):
         id = a_id
         current_sys = at_sys
         pos = current_sys.pos
         dest_sys = null
         dist_travelled = 0.0
     
-    func set_transit(dest: StarSystem, dist: float):
+    func set_transit(dest: Object, dist: float):
         dest_sys = dest
         dist_travelled = dist
         update_position()
@@ -145,19 +105,18 @@ class Galaxy extends AStar:
     var systems = {}
     var starlanes = []
     var fleets = {}
-    
-    func add_system(sys: StarSystem):
-        systems[sys.id] = sys
-        add_point(sys.id, sys.pos)
-    
+
+    func _init():
+        systems = global.freeorion._get_systems()
+
     func add_starlane(starlane: Starlane):
         if not ((starlane.source in systems.keys()) and (starlane.dest in systems.keys())):
             print("ERROR: Attempting to add starlane to non-existing systems")
             return
         
-        var ssys: StarSystem = systems[starlane.source]
+        var ssys: Object = systems[starlane.source]
         var ssys_linked_sys = ssys.get_linked_systems()
-        var dsys: StarSystem = systems[starlane.dest]
+        var dsys: Object = systems[starlane.dest]
         var dsys_linked_sys = dsys.get_linked_systems()
         
         if (ssys.id in dsys_linked_sys) and (not dsys.id in ssys_linked_sys) or (dsys.id in ssys_linked_sys) and (not ssys.id in dsys_linked_sys):
@@ -174,7 +133,7 @@ class Galaxy extends AStar:
             return
         
         connected_sys_list.append(sys_id)
-        var this_sys: StarSystem = systems[sys_id]
+        var this_sys: Object = systems[sys_id]
         
         for ssid in this_sys.get_linked_systems():
             if ssid in connected_sys_list:
@@ -194,32 +153,6 @@ class Galaxy extends AStar:
             already_assigned_sys += island
         return islands
 
-    func calc_positions(size, radius):
-        # Calculate positions for the disc galaxy shape.
-        for i in range(size):
-            var attempts: int = 100
-            var too_close = false
-            var new_pos: Vector3
-            
-            while attempts:
-                attempts -= 1
-                var dist = rand_range(0.0, radius)
-                var angle = rand_range(0.0, 6.2831853072)
-                new_pos = Vector3(dist * cos(angle), 0, dist * sin(angle))
-                
-                var nearest_neighbor = get_closest_point(new_pos)
-                if nearest_neighbor < 0:
-                    too_close = false
-                    break
-                elif new_pos.distance_to(get_point_position(nearest_neighbor)) < MIN_SYS_DIST:
-                    too_close = true
-                else:
-                    too_close = false
-                    break
-                
-            if not too_close:
-                add_system(StarSystem.new(i, new_pos))
-    
     func generate_starlanes():
         for ss in systems.values():
             set_point_disabled(ss.id, true)
@@ -238,7 +171,7 @@ class Galaxy extends AStar:
                 var dist_map = {}
                 var dist_list = []
                 for ssid in island:
-                    var ss: StarSystem = systems[ssid]
+                    var ss: Object = systems[ssid]
                     var closest_island = get_closest_point(ss.pos)
                     if closest_island >= 0:
                         var dist = ss.pos.distance_to(get_point_position(closest_island))
